@@ -1,0 +1,17 @@
+.vimInpUsername {
+  width: 70%;
+  background: none;
+  border: 0px;
+  border-bottom: 5px solid white;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  font-style: italic;
+
+  &:focus {
+    outline: none;
+  }
+}

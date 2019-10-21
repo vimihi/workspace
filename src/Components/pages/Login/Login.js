@@ -1,33 +1,75 @@
 import React, { Component } from "react";
 // import * as styles from './Login.module.scss';
-import "./styles.scss";
-import SubInput from "../../atoms/SubInput/SubInput";
+import styles from "./Login.module.scss";
+import LoginInput from "../../atoms/LoginInput/LoginInput";
+import LoginLabel from "../../atoms/LoginLabel/LoginLabel";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      switch: true,
+    };
+
+    this.next = this.next.bind(this);
+  }
+
+  next() {
+    (this.state.switch ? (
+      this.setState(state => ({
+        switch: false
+      }))
+    ) : 
+    this.setState(state => ({
+      switch: true
+    }))
+    )
+  }
+
   render() {
     return (
       // <div className={"d-flex flex-row vim-panel"}>
-        <section className="container-fluid d-flex flex-column vim-login-box">
-          {/* <!-- TITLE --> */}
-          <div className="no-select vim-title">Welcome</div>
+      <section
+        className={"container-fluid d-flex flex-column " + styles.vimLoginBox}
+      >
+        {/* <!-- TITLE --> */}
+        <div className={"no-select " + styles.vimTitle}>Welcome</div>
 
-          {/* <!-- SUB TITLE --> */}
-          <div className="no-select vim-lb-username">Tell me your username</div>
+        {this.state.switch ? (
+          <>
+            {/* <!-- SUB TITLE --> */}
+            <LoginLabel label="Tell me your username" />
 
-          {/* <!-- USERNAME --> */}
-          <SubInput placeholder = "Username" />
+            {/* <!-- USERNAME --> */}
+            <LoginInput placeholder="Username" name='username' />
+          </>
+        ) : (
+          <>
+            {/* <!-- SUB TITLE --> */}
+            <LoginLabel label="What is the password?" />
 
-          {/* <!-- TEXT ERROR --> */}
-          <div className="no-select vim-lb-error">
-            Oops, it<span className="vim-text-symbol">'</span>s not existed
-          </div>
+            {/* <!-- Password --> */}
+            <LoginInput placeholder="Password" name='password' />
+          </>
+        )}
 
-          {/* <!-- NEXT BUTTON --> */}
-          <button className="no-select vim-btn-next">Next</button>
-        </section>
+        {/* <!-- TEXT ERROR --> */}
+        <div className={"no-select " + styles.vimLbError}>
+          Oops, it<span className={styles.vimTextSymbol}>'</span>s not existed
+        </div>
+
+        {/* <!-- NEXT BUTTON --> */}
+        <button 
+          className={"no-select " + styles.vimBtnNext}
+          onClick={this.next}
+        >Next</button>
+      </section>
       // </div>
     );
   }
 }
+
+
 
 export default Login;
